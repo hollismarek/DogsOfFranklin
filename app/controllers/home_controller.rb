@@ -10,5 +10,8 @@ class HomeController < ApplicationController
 
   def contact
   end
+
+  def links
+  end
   
 end

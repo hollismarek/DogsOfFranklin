@@ -1,0 +1,86 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+html, body {
+  height: 100%;
+}
+
+.logo {
+  /*position: fixed;
+  top: 5px;
+  left: 5px;*/
+  float: left;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+nav {
+  float: left;
+  height: 100%;
+  //background-color: lightblue;
+  width: 120px;
+  font-family: 'Indie Flower', sans-serif;
+
+  ul {
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+main {
+  border-top-left-radius: 50px;
+  border-left: 1px solid lightblue;
+  border-top: 1px solid lightblue;
+  border-bottom: none;
+  border-right: none;
+  background-color: white;
+  height: 100%;
+  margin-left: 120px;
+}
+
+body {
+  margin: 0;
+  background-color: lightblue;
+  font-family: 'Taviraj', serif;
+}
+
+header {
+  //background-color: lightblue;
+  width: 100%;
+  padding: 10px 0 10px 0;
+  height: 100px;
+  font-family: 'Indie Flower', sans-serif;
+}
+
+h1 {
+  //text-align: center;
+  margin: 0;
+  padding-top: 25px;
+  margin-left: 170px;
+}
+
+p {
+  margin-left: 50px;
+}
+
+.home_image, .gallery_image {
+  border-radius: 5px;
+  display: inline;
+  vertical-align: top;
+}

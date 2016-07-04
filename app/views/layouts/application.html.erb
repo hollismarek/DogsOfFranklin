@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DogsOfFranklin</title>
+    <%= csrf_meta_tags %>
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Taviraj" rel="stylesheet">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <%= image_tag '9Tz7jR8TE.png', alt: 'Pawprint', class: 'logo' %>
+      <h1>Dogs Of Franklin, Massachusetts</h1>
+    </header>
+    <nav>
+      <ul>
+        <li><%= link_to 'Home', 'index_path' %></li>
+        <li><%= link_to 'About', 'index_path' %></li>
+        <li><%= link_to 'Gallery', 'index_path' %></li>
+        <li><%= link_to 'Contact', 'index_path' %></li>
+        <li><%= link_to 'Links', 'index_path' %></li>
+      </ul>
+    </nav>
+    <main>
+      <%= yield %>
+    </main>
+  </body>
+</html>

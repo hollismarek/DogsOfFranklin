@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Animal Bios</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Breed</th>
+      <th>Likes</th>
+      <th>Fears</th>
+      <th>Details</th>
+      <th>Images</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @animal_bios.each do |animal_bio| %>
+      <tr>
+        <td><%= animal_bio.name %></td>
+        <td><%= animal_bio.age %></td>
+        <td><%= animal_bio.breed %></td>
+        <td><%= animal_bio.likes %></td>
+        <td><%= animal_bio.fears %></td>
+        <td><%= animal_bio.details %></td>
+        <td><%= link_to 'Show', animal_bio %></td>
+        <td><%= link_to 'Edit', edit_animal_bio_path(animal_bio) %></td>
+        <td><%= link_to 'Destroy', animal_bio, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Animal Bio', new_animal_bio_path %>

@@ -1,0 +1,2 @@
+class AnimalBio < ApplicationRecord
+end

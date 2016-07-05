@@ -31,15 +31,25 @@ nav {
   float: left;
   height: 100%;
   //background-color: lightblue;
-  width: 120px;
+  width: 155px;
   font-family: 'Indie Flower', sans-serif;
 
   ul {
     list-style: none;
+    margin-left: 0;
   }
 
   a {
     text-decoration: none;
+    font-family: 'Indie Flower', sans-serif;
+    font-size: 18px;
+    line-height: 25px;
+  }
+
+  li {
+    font-family: 'Indie Flower', sans-serif;
+    font-size: 18px;
+    line-height: 25px;
   }
 }
 
@@ -51,7 +61,7 @@ main {
   border-right: none;
   background-color: white;
   height: 100%;
-  margin-left: 120px;
+  margin-left: 155px;
 }
 
 body {
@@ -66,17 +76,72 @@ header {
   padding: 10px 0 10px 0;
   height: 100px;
   font-family: 'Indie Flower', sans-serif;
+
+  h1 {
+    float: left;
+  }
+
+  ul {
+    float: right;
+    margin-top: 0;
+    padding-top: 25px;
+
+    li {
+      display: inline;
+      list-style: none;
+      font-family: 'Indie Flower', sans-serif;
+
+      a {
+        text-decoration: none;
+      }
+    }
+  }
 }
+
+a, a:visited {
+  color: black;
+}
+
+a:hover {
+  background: darkgray;
+}
+
 
 h1 {
   //text-align: center;
   margin: 0;
   padding-top: 25px;
-  margin-left: 170px;
+  margin-left: 50px;
 }
 
-p {
+h2 {
+  font-family: 'Indie Flower', sans-serif;
+}
+
+p, h2 {
   margin-left: 50px;
+}
+
+#logout, #current_user {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#logout {
+  margin-left: 20px;
+}
+
+.link_thumb {
+  display: inline;
+  margin-left: 5px;
+}
+
+.form {
+  margin-left: 50px;
+  margin-top: 45px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 20px;
 }
 
 .home_image, .gallery_image {

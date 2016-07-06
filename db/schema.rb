@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20160706224714) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "bios", force: :cascade do |t|
     t.string   "name"
     t.integer  "age"
@@ -31,7 +34,7 @@ ActiveRecord::Schema.define(version: 20160706224714) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "bios_id"
-    t.index ["bios_id"], name: "index_images_on_bios_id"
+    t.index ["bios_id"], name: "index_images_on_bios_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -45,4 +48,6 @@ ActiveRecord::Schema.define(version: 20160706224714) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "images", "bios"
+  add_foreign_key "images", "bios", column: "bios_id"
 end

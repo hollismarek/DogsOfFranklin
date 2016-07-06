@@ -23,10 +23,9 @@
       <ul>
         <li><%= link_to 'Home', home_index_path, id: 'home' %></li>
         <li><%= link_to 'About', home_about_path, id: 'about' %></li>
-        <li><%= link_to 'Gallery', home_gallery_path, id: 'gallery' %></li>
+        <li><%= link_to 'Gallery', bios_path, id: 'bios' %></li>
         <li><%= link_to 'Contact', home_contact_path, id: 'contact' %></li>
         <li><%= link_to 'Links', home_links_path, id: 'links' %></li>
-      </ul>
     </nav>
     <main>
       <%= yield %>
@@ -40,7 +39,7 @@
         }
 
         $("nav ul li a").each(function(key, val) {
-          if (currenturl.endsWith(val.id)) {
+          if (currenturl.endsWith(val.id) || currenturl.endsWith(val.id + "/")) {
             $(val).after(imagetag);
           }
         });

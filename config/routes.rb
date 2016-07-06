@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :animal_bios
+  resources :images
+  resources :bios
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'home#index', as: 'home_index'
@@ -15,4 +16,5 @@ Rails.application.routes.draw do
 
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
+
 end

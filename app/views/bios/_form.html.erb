@@ -1,10 +1,10 @@
-<%= form_for(animal_bio) do |f| %>
-  <% if animal_bio.errors.any? %>
+<%= form_for(bio) do |f| %>
+  <% if bio.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(animal_bio.errors.count, "error") %> prohibited this animal_bio from being saved:</h2>
+      <h2><%= pluralize(bio.errors.count, "error") %> prohibited this bio from being saved:</h2>
 
       <ul>
-      <% animal_bio.errors.full_messages.each do |message| %>
+      <% bio.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -38,7 +38,7 @@
 
   <div class="field">
     <%= f.label :details %>
-    <%= f.text_field :details %>
+    <%= f.text_area :details %>
   </div>
 
   <div class="actions">

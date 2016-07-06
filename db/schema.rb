@@ -10,22 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160705013110) do
+ActiveRecord::Schema.define(version: 20160706224714) do
 
-  create_table "animal_bios", force: :cascade do |t|
+  create_table "bios", force: :cascade do |t|
     t.string   "name"
     t.integer  "age"
     t.string   "breed"
     t.string   "likes"
     t.string   "fears"
-    t.string   "details"
+    t.text     "details"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "main_image"
   end
 
-  create_table "animal_images", force: :cascade do |t|
-    t.integer "animal_bio_id"
-    t.string  "image_path"
+  create_table "images", force: :cascade do |t|
+    t.string   "path"
+    t.string   "comment"
+    t.integer  "bio_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "bios_id"
+    t.index ["bios_id"], name: "index_images_on_bios_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -118,8 +118,21 @@ h2 {
   font-family: 'Indie Flower', sans-serif;
 }
 
-p, h2 {
+p, h2, table, form, .button {
   margin-left: 50px;
+}
+
+.button {
+  padding: 5px 10px 5px 10px;
+  border: 1px solid #aaa;
+  border-top-color:#ddd;
+  border-left-color:#ddd;
+  border-radius:3px;
+
+  a {
+    text-decoration: none;
+    text-color: black;
+  }
 }
 
 #logout, #current_user {

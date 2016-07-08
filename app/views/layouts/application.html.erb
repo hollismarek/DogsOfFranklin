@@ -19,22 +19,25 @@
         </ul>
       <% end %>
     </header>
-    <nav>
-      <ul>
-        <li><%= link_to 'Home', home_index_path, id: 'home' %></li>
-        <li><%= link_to 'About', home_about_path, id: 'about' %></li>
-        <li><%= link_to 'Gallery', bios_path, id: 'bios' %></li>
-        <li><%= link_to 'Contact', home_contact_path, id: 'contact' %></li>
-        <li><%= link_to 'Links', home_links_path, id: 'links' %></li>
-    </nav>
-    <main>
-      <%= yield %>
-    </main>
-    <footer>
-      &copy; Copyright GreatHall Web Development <%= Time.now.year %>.  All rights reserved.
-    </footer>
+    <div class='wrapper'>
+      <nav>
+        <ul>
+          <li><%= link_to 'Home', home_index_path, id: 'home' %></li>
+          <li><%= link_to 'About', home_about_path, id: 'about' %></li>
+          <li><%= link_to 'Gallery', bios_path, id: 'bios' %></li>
+          <li><%= link_to 'Contact', home_contact_path, id: 'contact' %></li>
+          <li><%= link_to 'Links', home_links_path, id: 'links' %></li>
+      </nav>
+      <main>
+        <%= yield %>
+      </main>
+      <footer>
+        &copy; Copyright GreatHall Web Development <%= Time.now.year %>.  All rights reserved.
+      </footer>
+    </div>
     <script>
       $(document).ready(function() {
+        $(".link_thumb").remove();
         var imagetag = '<%= image_tag '9Tz7jR8TE_small.png', class: 'link_thumb' %>';
         var currenturl = "<%= request.original_url %>";
         if (currenturl === "<%= request.base_url %>/") {

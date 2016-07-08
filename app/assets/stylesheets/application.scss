@@ -24,11 +24,14 @@
 }
 
 nav {
-  float: left;
+  //float: left;
   //background-color: lightblue;
   width: 155px;
   font-family: 'Indie Flower', sans-serif;
-
+  top:0px;
+  left:0px;
+  bottom:0px;
+  position:absolute;
   ul {
     list-style: none;
     margin-left: 0;
@@ -57,7 +60,9 @@ main {
   background-color: white;
   height: 100%;
   margin-left: 155px;
-  margin-bottom: 21px;
+  margin-bottom: -1000px;
+  padding-bottom: 1000px;
+  overflow: auto;
 }
 
 body {
@@ -129,6 +134,12 @@ p, h2, table, form, .button {
   margin-left: 50px;
 }
 
+.wrapper {
+  min-height:100%;
+  width:100%;
+  position:relative;
+  display:inline-block;
+}
 .button {
   padding: 5px 10px 5px 10px;
   border: 1px solid #aaa;

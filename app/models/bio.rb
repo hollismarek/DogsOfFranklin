@@ -1,3 +1,3 @@
 class Bio < ApplicationRecord
-  has_many :images
+  has_many :photos
 end

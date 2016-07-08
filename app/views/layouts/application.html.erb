@@ -30,6 +30,9 @@
     <main>
       <%= yield %>
     </main>
+    <footer>
+      &copy; Copyright GreatHall Web Development <%= Time.now.year %>.  All rights reserved.
+    </footer>
     <script>
       $(document).ready(function() {
         var imagetag = '<%= image_tag '9Tz7jR8TE_small.png', class: 'link_thumb' %>';

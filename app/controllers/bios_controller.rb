@@ -1,4 +1,6 @@
 require 'fileutils'
+require 'rmagick'
+include Magick
 
 class BiosController < ApplicationController
   before_action :set_bio, only: [:show, :edit, :update, :destroy]
@@ -35,15 +37,24 @@ class BiosController < ApplicationController
       if @bio.save
         #http://localhost:3000/images/public/1/greathall.png
         params['bio']['images'].each do |uf|
-          image = Image.new
-          folder = 'public/images/' + @bio.id.to_s
+          image = Photo.new
+          folder = "public/images/#{@bio.id.to_s}/thumbs"
           FileUtils.mkdir_p(folder)
-          image.path = "images/" + uf.original_filename
+
+          image.path = "images/#{@bio.id.to_s}/#{uf.original_filename}"
+          thumbnail_path = "images/#{@bio.id.to_s}/thumbs/#{uf.original_filename}"
+
           if @bio.main_image == nil
-            @bio.main_image = image.path
+            @bio.main_image = thumbnail_path
           end
           FileUtils.cp(uf.path, "public/" + image.path)
-          @bio.images << image
+          img = Image.read("public/" + image.path)[0]
+          target = Image.new(100, 100) do
+            self.background_color = 'white'
+          end
+          img.resize_to_fit!(100, 100)
+          target.composite(img, CenterGravity, CopyCompositeOp).write("public/" + thumbnail_path)
+          @bio.photos << image
           image.save
           @bio.save
           uf.tempfile.unlink
@@ -74,6 +85,13 @@ class BiosController < ApplicationController
   # DELETE /bios/1
   # DELETE /bios/1.json
   def destroy
+    Photo.where( bio_id: @bio.id).each do |image|
+      image.destroy
+    end
+    directory = "public/images/#{@bio.id}"
+    if File.directory?(directory)
+      FileUtils.remove_dir directory
+    end
     @bio.destroy
     respond_to do |format|
       format.html { redirect_to bios_url, notice: 'Bio was successfully destroyed.' }

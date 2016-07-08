@@ -47,8 +47,11 @@ class BiosController < ApplicationController
           if @bio.main_image == nil
             @bio.main_image = thumbnail_path
           end
-          FileUtils.cp(uf.path, "public/" + image.path)
-          img = Image.read("public/" + image.path)[0]
+          #FileUtils.cp(uf.path, "public/" + image.path)
+          img = Image.read(uf.path)[0]
+          img.auto_orient!
+          img.resize_to_fit!(500, 500)
+          img.write('public/' + image.path)
           target = Image.new(100, 100) do
             self.background_color = 'white'
           end

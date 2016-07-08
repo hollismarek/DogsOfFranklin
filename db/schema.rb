@@ -28,12 +28,12 @@ ActiveRecord::Schema.define(version: 20160708010818) do
   end
 
   create_table "photos", force: :cascade do |t|
+    t.string   "path"
     t.string   "comment"
     t.integer  "bio_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "bios_id"
-    t.string   "path"
     t.index ["bios_id"], name: "index_photos_on_bios_id", using: :btree
   end
 

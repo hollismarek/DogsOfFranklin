@@ -4,7 +4,7 @@ include Magick
 
 class BiosController < ApplicationController
   before_action :set_bio, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, only: [:new, :create, :show, :edit, :update]
+  before_action :require_user, only: [:new, :create, :edit, :update]
   before_action :require_admin, only: [:destroy]
 
   # GET /bios
@@ -16,6 +16,12 @@ class BiosController < ApplicationController
   # GET /bios/1
   # GET /bios/1.json
   def show
+    @images = Photo.find_by(bio_id: @bio.id)
+    respond_to do |format|
+        format.html # show.html.erb
+        format.js # show.js.erb
+        format.json { render json: @bio }
+    end
   end
 
   # GET /bios/new

@@ -2,35 +2,30 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @bio.name %>
+  <%= bio.name %>
 </p>
 
 <p>
   <strong>Age:</strong>
-  <%= @bio.age %>
+  <%= bio.age %>
 </p>
 
 <p>
   <strong>Breed:</strong>
-  <%= @bio.breed %>
+  <%= bio.breed %>
 </p>
 
 <p>
   <strong>Likes:</strong>
-  <%= @bio.likes %>
+  <%= bio.likes %>
 </p>
 
 <p>
   <strong>Fears:</strong>
-  <%= @bio.fears %>
+  <%= bio.fears %>
 </p>
 
 <p>
   <strong>Details:</strong>
-  <%= @bio.details %>
+  <%= bio.details %>
 </p>
-
-<% if current_user %>
-  <%= link_to 'Edit', edit_bio_path(@bio) %> |
-<% end %>
-<%= link_to 'Back', bios_path %>

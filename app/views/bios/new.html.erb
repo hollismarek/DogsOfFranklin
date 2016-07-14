@@ -1,21 +1,2 @@
-<h1>New Bio</h1>
-<div class="form">
-  <%= form_for @bio, html: { multipart: true } do |frm| %>
-    <%= frm.label :name %>
-    <%= frm.text_field :name %>
-    <%= frm.label :age %>
-    <%= frm.number_field :age %>
-    <%= frm.label :breed %>
-    <%= frm.text_field :breed %>
-    <%= frm.label :likes %>
-    <%= frm.text_area :likes, class: "small_area" %>
-    <%= frm.label :fears %>
-    <%= frm.text_area :fears, class: "small_area" %>
-    <%= frm.label :details %>
-    <%= frm.text_area :details %>
-    <%= frm.label :images %>
-    <%= file_field :bio, :images, multiple: true  %>
-    <br>
-    <%= frm.submit 'Save' %>
-  <% end %>
-</div>
+<h1>Add a New Dog</h1>
+<%= render 'form', bio: @bio %>

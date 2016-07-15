@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  def index
+  def index  
     if Photo.count > 0
       @image_path = "/" + Photo.first.path
     else

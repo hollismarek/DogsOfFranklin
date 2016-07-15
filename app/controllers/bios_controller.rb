@@ -1,5 +1,7 @@
 require 'fileutils'
 require 'rmagick'
+require 'aws-sdk'
+require 'pathname'
 include Magick
 
 class BiosController < ApplicationController
@@ -38,26 +40,28 @@ class BiosController < ApplicationController
   def create
     @bio = Bio.new(bio_params)
     #logger.debug Time.now.to_s + " >> " + params["bio"]["images"].inspect
-
     respond_to do |format|
       if @bio.save
         #http://localhost:3000/images/public/1/greathall.png
+        s3 = Aws::S3::Resource.new(region: ENV['S3_REGION'])
+        bucket = s3.bucket(ENV['S3_BUCKET_NAME'])
         params['bio']['images'].each do |uf|
           image = Photo.new
-          folder = "public/images/#{@bio.id.to_s}/thumbs"
-          FileUtils.mkdir_p(folder)
+          #folder = "public/images/#{@bio.id.to_s}/thumbs"
+          #FileUtils.mkdir_p(folder)
 
-          image.path = "images/#{@bio.id.to_s}/#{uf.original_filename}"
-          thumbnail_path = "images/#{@bio.id.to_s}/thumbs/#{uf.original_filename}"
+          #image.path = "images/#{@bio.id.to_s}/#{uf.original_filename}"
+          #thumbnail_path = "images/#{@bio.id.to_s}/thumbs/#{uf.original_filename}"
 
           if @bio.main_image == nil
-            @bio.main_image = thumbnail_path
+            #@bio.main_image = thumbnail_path
           end
           #FileUtils.cp(uf.path, "public/" + image.path)
           img = Image.read(uf.path)[0]
           img.auto_orient!
           img.resize_to_fit!(500, 500)
-          img.write('public/' + image.path)
+          #img.write('public/' + image.path)
+          s3image = bucket.object("#{bio_id}_#{Pathname.new(uf.path).basename.to_s}")
           target = Image.new(100, 100) do
             self.background_color = 'white'
           end

@@ -52,21 +52,26 @@ class BiosController < ApplicationController
 
           #image.path = "images/#{@bio.id.to_s}/#{uf.original_filename}"
           #thumbnail_path = "images/#{@bio.id.to_s}/thumbs/#{uf.original_filename}"
-
-          if @bio.main_image == nil
-            #@bio.main_image = thumbnail_path
-          end
+          s3image = bucket.object("#{@bio.id}_#{Pathname.new(uf.path).basename.to_s}")
+          s3thumb = bucket.object("thumb_#{@bio.id}_#{Pathname.new(uf.path).basename.to_s}")
           #FileUtils.cp(uf.path, "public/" + image.path)
           img = Image.read(uf.path)[0]
           img.auto_orient!
           img.resize_to_fit!(500, 500)
           #img.write('public/' + image.path)
-          s3image = bucket.object("#{bio_id}_#{Pathname.new(uf.path).basename.to_s}")
+          s3image.put(body: img.to_blob, acl: 'public-read')
+          image.path = s3image.public_url
+
+
           target = Image.new(100, 100) do
             self.background_color = 'white'
           end
+          target.format = img.format
           img.resize_to_fit!(100, 100)
-          target.composite(img, CenterGravity, CopyCompositeOp).write("public/" + thumbnail_path)
+          s3thumb.put(body: target.composite(img, CenterGravity, CopyCompositeOp).to_blob, acl: 'public-read')
+          if @bio.main_image == nil
+            @bio.main_image = s3thumb.public_url
+          end
           @bio.photos << image
           image.save
           @bio.save

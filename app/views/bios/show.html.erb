@@ -1,35 +1,5 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @bio.name %>
-</p>
-
-<p>
-  <strong>Age:</strong>
-  <%= @bio.age %>
-</p>
-
-<p>
-  <strong>Breed:</strong>
-  <%= @bio.breed %>
-</p>
-
-<p>
-  <strong>Likes:</strong>
-  <%= @bio.likes %>
-</p>
-
-<p>
-  <strong>Fears:</strong>
-  <%= @bio.fears %>
-</p>
-
-<p>
-  <strong>Details:</strong>
-  <%= @bio.details %>
-</p>
-
+<%= render 'show_bio', bio: @bio, images: @images %>
 <% if current_user %>
   <%= link_to 'Edit', edit_bio_path(@bio) %> |
 <% end %>

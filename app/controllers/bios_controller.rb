@@ -2,6 +2,7 @@ require 'fileutils'
 require 'rmagick'
 require 'aws-sdk'
 require 'pathname'
+require 'uri'
 include Magick
 
 class BiosController < ApplicationController
@@ -18,7 +19,7 @@ class BiosController < ApplicationController
   # GET /bios/1
   # GET /bios/1.json
   def show
-    @images = Photo.find_by(bio_id: @bio.id)
+    @images = Photo.where(bio_id: @bio.id)
     respond_to do |format|
         format.html # show.html.erb
         format.js # show.js.erb
@@ -61,8 +62,7 @@ class BiosController < ApplicationController
           #img.write('public/' + image.path)
           s3image.put(body: img.to_blob, acl: 'public-read')
           image.path = s3image.public_url
-
-
+          image.thumbnail = s3thumb.public_url
           target = Image.new(100, 100) do
             self.background_color = 'white'
           end
@@ -103,13 +103,26 @@ class BiosController < ApplicationController
   # DELETE /bios/1
   # DELETE /bios/1.json
   def destroy
+    s3 = Aws::S3::Resource.new(region: ENV['S3_REGION'])
+    bucket = s3.bucket(ENV['S3_BUCKET_NAME'])
     Photo.where( bio_id: @bio.id).each do |image|
+      if (image.path)
+        imagename = URI(image.path).path.chomp('/').split('/').last
+        obj = bucket.object(imagename)
+        obj.delete
+      end
+      if (image.thumbnail)
+        thumbname = URI(image.thumbnail).path.chomp('/').split('/').last
+        objthumb = bucket.object(thumbname)
+        objthumb.delete
+      end
       image.destroy
+
     end
-    directory = "public/images/#{@bio.id}"
-    if File.directory?(directory)
-      FileUtils.remove_dir directory
-    end
+    #directory = "public/images/#{@bio.id}"
+    #if File.directory?(directory)
+    #  FileUtils.remove_dir directory
+    #end
     @bio.destroy
     respond_to do |format|
       format.html { redirect_to bios_url, notice: 'Bio was successfully destroyed.' }

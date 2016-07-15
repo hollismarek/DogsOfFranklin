@@ -1,3 +1,18 @@
 // Place all the styles related to the Bios controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.dog_details {
+
+}
+
+.dog_thumbs {
+  ul {
+    padding-left: 0;
+    margin-left: 5px;
+
+    li {
+      list-style: none;
+      display: inline;
+    }
+  }
+}

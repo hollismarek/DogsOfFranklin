@@ -1,2 +1,2 @@
 $('.modal_header .close_button').before("<div class='dog_name'><%= @bio.name %></div>");
-$('.modal_body').html(" <%= escape_javascript(render 'show_bio', bio: @bio ) %>")
+$('.modal_body').html(" <%= escape_javascript(render 'show_bio', bio: @bio, images: @images ) %>")

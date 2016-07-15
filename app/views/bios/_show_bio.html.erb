@@ -1,31 +1,40 @@
 <p id="notice"><%= notice %></p>
+<div class="dog_details">
+  <p>
+    <strong>Name:</strong>
+    <%= bio.name %>
+  </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= bio.name %>
-</p>
+  <p>
+    <strong>Age:</strong>
+    <%= bio.age %>
+  </p>
 
-<p>
-  <strong>Age:</strong>
-  <%= bio.age %>
-</p>
+  <p>
+    <strong>Breed:</strong>
+    <%= bio.breed %>
+  </p>
 
-<p>
-  <strong>Breed:</strong>
-  <%= bio.breed %>
-</p>
+  <p>
+    <strong>Likes:</strong>
+    <%= bio.likes %>
+  </p>
 
-<p>
-  <strong>Likes:</strong>
-  <%= bio.likes %>
-</p>
-
-<p>
-  <strong>Fears:</strong>
-  <%= bio.fears %>
-</p>
-
+  <p>
+    <strong>Fears:</strong>
+    <%= bio.fears %>
+  </p>
+</div>
 <p>
   <strong>Details:</strong>
   <%= bio.details %>
 </p>
+<div class="dog_thumbs">
+  <ul>
+    <% @images.each do |img| %>
+      <% if img.thumbnail %>
+        <li><%= link_to image_tag(img.thumbnail, alt: "Thumbnail for #{bio.name}"), img.path %></li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

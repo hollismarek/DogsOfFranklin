@@ -172,12 +172,20 @@ p, h2, table, form, .button {
   margin-left: 5px;
 }
 
-.form {
+.form, .buttons {
   margin-left: 50px;
+}
+
+.form {
   margin-top: 45px;
   border: 1px solid gray;
   border-radius: 10px;
   padding: 20px;
+  display: inline-block;
+}
+
+.buttons {
+  margin-top: 10px;
 }
 
 .home_image, .gallery_image {
@@ -207,6 +215,7 @@ p, h2, table, form, .button {
   min-width: 100px;
   min-height: 100px;
   background: white;
+  z-index: 5000;
   .modal_header {
     border-bottom: 1px solid darkgray;
     background: lightblue;
@@ -224,4 +233,30 @@ p, h2, table, form, .button {
 
     }
   }
+}
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: 0.5s;
+}
+
+.progress {
+  transform: translate(-50%, -50%);
+  animation-name: rotate;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
+
+@keyframes rotate {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
 }

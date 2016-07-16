@@ -13,8 +13,37 @@
     <%= frm.label :details %>
     <%= frm.text_area :details %>
     <%= frm.label :images %>
-    <%= file_field :bio, :images, multiple: true  %>
+    <%= file_field :bio, :images, multiple: true, id: 'dogs_input' %>
     <br>
-    <%= frm.submit 'Save' %>
+    <%= frm.submit 'Save', id: 'save_button'%>
   <% end %>
+  <div class="dog_thumbs" id="loaded_images">
+    <ul id="dogs"></ul>
+  </div>
 </div>
+
+<script>
+  $('#dogs_input').change(function() {
+    readPhotos(this);
+  });
+
+  $('#save_button').click(function() {
+    //<div class="progress"> <%=image_tag '9Tz7jR8TE_small.png' %></div>
+    overlay('<%=image_tag '9Tz7jR8TE_small.png', class: 'progress' %>')
+  });
+
+  function readPhotos(img) {
+    if (img.files && img.files[0]) {
+      for (var i = 0; i < img.files.length; i++) {
+      $('#dogs').empty();
+      var reader = new FileReader();
+
+        reader.onload = function(e) {
+          dogbytes = e.target.result;
+          $('#dogs').append('<li><img class= "thumb" src="' + e.target.result + '"></li>');
+        }
+        reader.readAsDataURL(img.files[i])
+      }
+    }
+  }
+</script>

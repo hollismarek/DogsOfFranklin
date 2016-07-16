@@ -11,8 +11,30 @@
     margin-left: 5px;
 
     li {
+      padding-left: 5px;
       list-style: none;
       display: inline;
     }
   }
+}
+
+.thumb {
+  width: 100px;
+  height: 100px;
+  border: 1px solid darkgray;
+  border-radius: 5px;
+}
+
+.gallery-list {
+    li {
+      list-style: none;
+      display: inline;
+      div {
+        padding: 5px;
+        padding-right: 0;
+        border: 1px solid darkgray;
+        border-radius: 5px;
+        display: inline-block;
+      }
+    }
 }

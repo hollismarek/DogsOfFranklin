@@ -14,3 +14,16 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+function overlay(imageTag) {
+  if(imageTag)
+  {
+    $('body').append('<div class="overlay">' + imageTag + '</div>');
+  } else {
+    $('body').append('<div class="overlay"></div>');
+  }
+}
+
+function closeOverlay() {
+  $('overlay').remove();
+}

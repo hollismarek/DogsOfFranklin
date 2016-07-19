@@ -5,8 +5,9 @@ Rails.application.routes.draw do
 
   root 'home#index', as: 'home_index'
   get 'home_about', to: 'home#about'
-  get 'home_gallery', to: 'home#gallery'
-  get 'home_contact', to: 'home#contact'
+  get 'home_gallery', to: 'home#gallery'  
+  get 'contacts', to: 'contact#new'
+  post 'contacts', to: 'contact#create'
   get 'home_links', to: 'home#links'
 
   get 'signup', to: 'users#new'

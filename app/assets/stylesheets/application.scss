@@ -184,6 +184,7 @@ p, h2, table, .form, .button, .buttons {
   .button {
     float: right;
     margin: 0;
+    margin-top: 5px;
     width: auto;
   }
 }
@@ -267,11 +268,11 @@ p, h2, table, .form, .button, .buttons {
 
 input {
   margin-top: 5px;
-  width: 145px;
+  width: 125px;
 }
 label {
   float: left;
-  width: 50px;
+  width: 70px;
   margin-top: 5px;
   padding-left: 2px;
 }

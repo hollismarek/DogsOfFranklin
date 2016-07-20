@@ -1,9 +1,11 @@
+<h2>Login</h2>
 <div class="form">
   <%= form_for :session, url: login_path do |frm| %>
     <%= frm.text_field :username, placeholder: "Username" %>
     <br>
     <%= frm.password_field :password, placeholder: "Password" %>
     <br>
-    <%= frm.submit "Log in" %>
+    <br>
+    <%= frm.submit "Log in", class: "button" %>
   <% end %>
 </div>

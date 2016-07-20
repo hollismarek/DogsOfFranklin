@@ -128,9 +128,10 @@ h1 {
 
 h2 {
   font-family: 'Indie Flower', sans-serif;
+  padding-top: 25px;
 }
 
-p, h2, table, form, .button {
+p, h2, table, .form, .button, .buttons {
   margin-left: 50px;
 }
 
@@ -148,6 +149,7 @@ p, h2, table, form, .button {
   border-radius:3px;
   margin-bottom: 10px;
   display: inline-block;
+  background-color: white;
   a {
     text-decoration: none;
     text-color: black;
@@ -172,16 +174,18 @@ p, h2, table, form, .button {
   margin-left: 5px;
 }
 
-.form, .buttons {
-  margin-left: 50px;
-}
-
 .form {
-  margin-top: 45px;
+
   border: 1px solid gray;
   border-radius: 10px;
   padding: 20px;
   display: inline-block;
+
+  .button {
+    float: right;
+    margin: 0;
+    width: auto;
+  }
 }
 
 .buttons {
@@ -259,4 +263,15 @@ p, h2, table, form, .button {
 @keyframes rotate {
     from {transform: rotate(0deg);}
     to {transform: rotate(360deg);}
+}
+
+input {
+  margin-top: 5px;
+  width: 145px;
+}
+label {
+  float: left;
+  width: 50px;
+  margin-top: 5px;
+  padding-left: 2px;
 }

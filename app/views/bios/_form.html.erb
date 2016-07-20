@@ -1,25 +1,24 @@
 <div class="form">
   <%= form_for bio, html: { multipart: true } do |frm| %>
     <%= frm.label :name %>
-    <%= frm.text_field :name %>
+    <%= frm.text_field :name %> <br>
     <%= frm.label :age %>
-    <%= frm.number_field :age %>
+    <%= frm.number_field :age %> <br>
     <%= frm.label :breed %>
-    <%= frm.text_field :breed %>
-    <%= frm.label :likes %>
-    <%= frm.text_area :likes, class: "small_area" %>
-    <%= frm.label :fears %>
-    <%= frm.text_area :fears, class: "small_area" %>
-    <%= frm.label :details %>
-    <%= frm.text_area :details %>
-    <%= frm.label :images %>
+    <%= frm.text_field :breed %> <br>
+    <%= frm.label :likes %> <br>
+    <%= frm.text_area :likes, class: "small_area", cols: 30, rows: 5 %> <br>
+    <%= frm.label :fears %> <br>
+    <%= frm.text_area :fears, class: "small_area", cols: 30, rows: 5 %> <br>
+    <%= frm.label :details %> <br>
+    <%= frm.text_area :details, cols: 30, rows: 10 %><br>
     <%= file_field :bio, :images, multiple: true, id: 'dogs_input' %>
     <br>
-    <%= frm.submit 'Save', id: 'save_button'%>
+    <div class="dog_thumbs" id="loaded_images">
+      <ul id="dogs"></ul>
+    </div>
+    <%= frm.submit 'Save', id: 'save_button', class: 'button'%>
   <% end %>
-  <div class="dog_thumbs" id="loaded_images">
-    <ul id="dogs"></ul>
-  </div>
 </div>
 
 <script>

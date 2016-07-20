@@ -1,6 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Gallery</h1>
 <ul class='gallery-list'>
   <% @bios.each do |bio| %>
     <li>
@@ -23,9 +22,11 @@
 </ul>
 
 <br>
-<div class="button">
-  <%= link_to 'New Dog', new_bio_path, id: 'new_dog' %>
-</div>
+<% if current_user %>
+  <div class="button">
+    <%= link_to 'New Dog', new_bio_path, id: 'new_dog' %>
+  </div>
+<% end %>
 <div class="modal" id="show_dog">
   <div class="modal_header">
     <div class="right close_button">

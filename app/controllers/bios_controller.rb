@@ -40,43 +40,11 @@ class BiosController < ApplicationController
   # POST /bios.json
   def create
     @bio = Bio.new(bio_params)
-    #logger.debug Time.now.to_s + " >> " + params["bio"]["images"].inspect
     respond_to do |format|
       if @bio.save
-        #http://localhost:3000/images/public/1/greathall.png
-        s3 = Aws::S3::Resource.new(region: ENV['S3_REGION'])
-        bucket = s3.bucket(ENV['S3_BUCKET_NAME'])
-        params['bio']['images'].each do |uf|
-          image = Photo.new
-          #folder = "public/images/#{@bio.id.to_s}/thumbs"
-          #FileUtils.mkdir_p(folder)
+        save_images_to_s3 params['bio']['images']
+        @bio.save
 
-          #image.path = "images/#{@bio.id.to_s}/#{uf.original_filename}"
-          #thumbnail_path = "images/#{@bio.id.to_s}/thumbs/#{uf.original_filename}"
-          s3image = bucket.object("#{@bio.id}_#{Pathname.new(uf.path).basename.to_s}")
-          s3thumb = bucket.object("thumb_#{@bio.id}_#{Pathname.new(uf.path).basename.to_s}")
-          #FileUtils.cp(uf.path, "public/" + image.path)
-          img = Image.read(uf.path)[0]
-          img.auto_orient!
-          img.resize_to_fit!(500, 500)
-          #img.write('public/' + image.path)
-          s3image.put(body: img.to_blob, acl: 'public-read')
-          image.path = s3image.public_url
-          image.thumbnail = s3thumb.public_url
-          target = Image.new(100, 100) do
-            self.background_color = 'white'
-          end
-          target.format = img.format
-          img.resize_to_fit!(100, 100)
-          s3thumb.put(body: target.composite(img, CenterGravity, CopyCompositeOp).to_blob, acl: 'public-read')
-          if @bio.main_image == nil
-            @bio.main_image = s3thumb.public_url
-          end
-          @bio.photos << image
-          image.save
-          @bio.save
-          uf.tempfile.unlink
-        end
         format.html { redirect_to bios_path, notice: 'Bio was successfully created.' }
         format.json { render :show, status: :created, location: @bio }
       else
@@ -91,6 +59,8 @@ class BiosController < ApplicationController
   def update
     respond_to do |format|
       if @bio.update(bio_params)
+        save_images_to_s3 params['bio']['images']
+        @bio.save
         format.html { redirect_to @bio, notice: 'Bio was successfully updated.' }
         format.json { render :show, status: :ok, location: @bio }
       else
@@ -119,10 +89,7 @@ class BiosController < ApplicationController
       image.destroy
 
     end
-    #directory = "public/images/#{@bio.id}"
-    #if File.directory?(directory)
-    #  FileUtils.remove_dir directory
-    #end
+    
     @bio.destroy
     respond_to do |format|
       format.html { redirect_to bios_url, notice: 'Bio was successfully destroyed.' }
@@ -139,5 +106,33 @@ class BiosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def bio_params
       params.require(:bio).permit(:name, :age, :breed, :likes, :fears, :details)
+    end
+
+    def save_images_to_s3(image_list)
+      s3 = Aws::S3::Resource.new(region: ENV['S3_REGION'])
+      bucket = s3.bucket(ENV['S3_BUCKET_NAME'])
+      image_list.each do |uf|
+        image = Photo.new
+        s3image = bucket.object("#{@bio.id}_#{Pathname.new(uf.path).basename.to_s}")
+        s3thumb = bucket.object("thumb_#{@bio.id}_#{Pathname.new(uf.path).basename.to_s}")
+        img = Image.read(uf.path)[0]
+        img.auto_orient!
+        img.resize_to_fit!(500, 500)
+        s3image.put(body: img.to_blob, acl: 'public-read')
+        image.path = s3image.public_url
+        image.thumbnail = s3thumb.public_url
+        target = Image.new(100, 100) do
+          self.background_color = 'white'
+        end
+        target.format = img.format
+        img.resize_to_fit!(100, 100)
+        s3thumb.put(body: target.composite(img, CenterGravity, CopyCompositeOp).to_blob, acl: 'public-read')
+        if @bio.main_image == nil
+          @bio.main_image = s3thumb.public_url
+        end
+        @bio.photos << image
+        image.save
+        uf.tempfile.unlink
+      end
     end
 end

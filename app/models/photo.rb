@@ -1,5 +1,7 @@
+require 'aws-sdk'
+require 'pathname'
+require 'uri'
+
 class Photo < ApplicationRecord
   belongs_to :bio
-
-  attr_accessor :should_remove
 end

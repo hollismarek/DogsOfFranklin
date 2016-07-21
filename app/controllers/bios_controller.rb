@@ -34,7 +34,7 @@ class BiosController < ApplicationController
 
   # GET /bios/1/edit
   def edit
-    @images  = Photo.where(bio_id: @bio.id)
+    @bio.images  = Photo.where(bio_id: @bio.id)
   end
 
   # POST /bios
@@ -62,9 +62,11 @@ class BiosController < ApplicationController
       if @bio.update(bio_params)
         save_images_to_s3 params['bio']['images']
         @bio.save
-        params['images'].each do |img|
-          if img.should_remove
-            Photo.find_by(id: img.id).delete
+        if params['img_ids']
+          params['img_ids'].each do |img|
+            image = Photo.find_by(id: img)
+            delete_from_s3 image
+            image.destroy
           end
         end
         format.html { redirect_to @bio, notice: 'Bio was successfully updated.' }
@@ -79,21 +81,10 @@ class BiosController < ApplicationController
   # DELETE /bios/1
   # DELETE /bios/1.json
   def destroy
-    s3 = Aws::S3::Resource.new(region: ENV['S3_REGION'])
-    bucket = s3.bucket(ENV['S3_BUCKET_NAME'])
-    Photo.where( bio_id: @bio.id).each do |image|
-      if (image.path)
-        imagename = URI(image.path).path.chomp('/').split('/').last
-        obj = bucket.object(imagename)
-        obj.delete
-      end
-      if (image.thumbnail)
-        thumbname = URI(image.thumbnail).path.chomp('/').split('/').last
-        objthumb = bucket.object(thumbname)
-        objthumb.delete
-      end
-      image.destroy
 
+    Photo.where( bio_id: @bio.id).each do |image|
+      delete_from_s3 image
+      image.destroy
     end
 
     @bio.destroy
@@ -142,6 +133,21 @@ class BiosController < ApplicationController
           image.save
           uf.tempfile.unlink
         end
+      end
+    end
+
+    def delete_from_s3(image)
+      s3 = Aws::S3::Resource.new(region: ENV['S3_REGION'])
+      bucket = s3.bucket(ENV['S3_BUCKET_NAME'])
+      if (image.path)
+        imagename = URI(image.path).path.chomp('/').split('/').last
+        obj = bucket.object(imagename)
+        obj.delete
+      end
+      if (image.thumbnail)
+        thumbname = URI(image.thumbnail).path.chomp('/').split('/').last
+        objthumb = bucket.object(thumbname)
+        objthumb.delete
       end
     end
 end

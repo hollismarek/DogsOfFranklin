@@ -169,6 +169,9 @@ p, h2, table, .form, .button, .buttons {
   margin-left: 20px;
 }
 
+.thumb_box {
+  display: inline-block;
+}
 .link_thumb {
   display: inline;
   margin-left: 5px;
@@ -266,10 +269,16 @@ p, h2, table, .form, .button, .buttons {
     to {transform: rotate(360deg);}
 }
 
-input {
+input[type="number"],
+input[type="text"] {
   margin-top: 5px;
   width: 125px;
 }
+
+.middle-v {
+  position: absolute;
+}
+
 label {
   float: left;
   width: 70px;

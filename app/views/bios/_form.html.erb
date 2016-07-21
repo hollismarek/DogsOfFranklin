@@ -15,7 +15,14 @@
     <%= file_field :bio, :images, multiple: true, id: 'dogs_input' %>
     <br>
     <div class="dog_thumbs" id="loaded_images">
-      <ul id="dogs"></ul>
+      <ul id="dogs">
+        <% if @images %>
+          <% @images.each do |img| %>
+            <!--<li><%= image_tag img.thumbnail, class: 'thumb', data: {photo_id: img.id}  %></li>-->
+            <li><%= image_tag img.thumbnail, class: 'thumb', data: {photo_id: img.id} %><%= check_box img.should_remove, 'delete', data: { photo_id: img.id } %></li>
+          <% end %>
+        <% end %>
+      </ul>
     </div>
     <%= frm.submit 'Save', id: 'save_button', class: 'button'%>
   <% end %>

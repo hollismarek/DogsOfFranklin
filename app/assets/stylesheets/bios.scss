@@ -2,18 +2,32 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .dog_details {
+  float: left;
+}
+
+.dog_div {
 
 }
 
+.separator {
+  width: 110px;
+  margin-left: 5px;
+}
+
+.dog_link img {
+  width: 100px;
+  height: 100px;
+}
+
 .dog_thumbs {
+  float: right;
   ul {
     padding-left: 0;
     margin-left: 5px;
-
+    margin-top: 5px;
     li {
       padding-left: 5px;
       list-style: none;
-      display: inline;
     }
   }
 }
@@ -25,17 +39,27 @@
   border-radius: 5px;
 }
 
+#image_chooser {
+  height: 28px;
+  line-height: 28px;
+}
+
 .gallery-list {
-    li {
-      list-style: none;
-      display: inline;
-      div {
-        padding: 5px;
-        padding-right: 0;
-        border: 1px solid darkgray;
-        border-radius: 5px;
-        display: inline-block;
-        text-align: center;
+  margin: 33px 25px 25px 25px;
+  padding-left: 25px;
+  li {
+    list-style: none;
+    display: inline;
+    div {
+      padding: 5px;
+      border: 1px solid darkgray;
+      border-radius: 5px;
+      display: inline-block;
+      text-align: center;
+      img {
+        display: block;
+        margin: auto
       }
     }
+  }
 }

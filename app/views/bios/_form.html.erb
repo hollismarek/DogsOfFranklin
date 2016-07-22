@@ -1,5 +1,6 @@
 <div class="form">
   <%= form_for bio, html: { multipart: true } do |frm| %>
+   <div class="dog_details">
     <%= frm.label :name %>
     <%= frm.text_field :name %> <br>
     <%= frm.label :age %>
@@ -12,12 +13,13 @@
     <%= frm.text_area :fears, class: "small_area", cols: 30, rows: 5 %> <br>
     <%= frm.label :details %> <br>
     <%= frm.text_area :details, cols: 30, rows: 10 %><br>
-    <%= label_tag 'dogs_input', 'Choose Images', class: 'button jsonly' %>
+    <%= label_tag 'dogs_input', 'Choose Images', class: 'button jsonly', id: 'image_chooser' %>
     <%= file_field :bio, :images, multiple: true, id: 'dogs_input' %>
-    <br>
-    <div class="dog_thumbs" id="loaded_images">
-      <ul id="existing_dogs">
-        <% if @bio.images %>
+    <%= frm.submit 'Save', id: 'save_button', class: 'button', style: 'float: right' %>
+    </div>
+    <% if @bio.images %>
+      <div class="dog_thumbs" id="loaded_images">
+        <ul id="existing_dogs">
           <% @bio.images.each do |img| %>
             <!--<li><%= image_tag img.thumbnail, class: 'thumb', data: {photo_id: img.id}  %></li>-->
             <li>
@@ -27,12 +29,12 @@
               </div>
             </li>
           <% end %>
-        <% end %>
-      </ul>
+        </ul>
+        <hr class='separator'>
+      <% end %>
       <ul id="dogs">
       </ul>
     </div>
-    <%= frm.submit 'Save', id: 'save_button', class: 'button'%>
   <% end %>
 </div>
 

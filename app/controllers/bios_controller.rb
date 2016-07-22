@@ -66,6 +66,17 @@ class BiosController < ApplicationController
           params['img_ids'].each do |img|
             image = Photo.find_by(id: img)
             delete_from_s3 image
+            if @bio.main_image == image.thumbnail
+              next_image = Photo.where.not(thumbnail: @bio.main_image).find_by(bio_id: @bio.id)
+
+              if next_image
+                @bio.main_image = next_image.thumbnail
+                puts next_image.id.to_s + ' :: ' + image.id.to_s
+              else
+                @bio.main_image = ''
+              end
+              @bio.save
+            end
             image.destroy
           end
         end
@@ -116,10 +127,14 @@ class BiosController < ApplicationController
         s3 = Aws::S3::Resource.new(region: ENV['S3_REGION'])
         bucket = s3.bucket(ENV['S3_BUCKET_NAME'])
         image_list.each do |uf|
-          img = Image.read(uf.path)[0]
-
+          begin
+            img = Image.read(uf.path)[0]
+          rescue Exception => ex
+            puts ex.to_s
+            img = nil
+          end
           if !img
-            puts 'err'
+            puts "Could not load #{uf.path}"
             errors.push "#{uf.path}"
           else
             image = Photo.new

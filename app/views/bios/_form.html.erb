@@ -12,6 +12,7 @@
     <%= frm.text_area :fears, class: "small_area", cols: 30, rows: 5 %> <br>
     <%= frm.label :details %> <br>
     <%= frm.text_area :details, cols: 30, rows: 10 %><br>
+    <%= label_tag 'dogs_input', 'Choose Images', class: 'button jsonly' %>
     <%= file_field :bio, :images, multiple: true, id: 'dogs_input' %>
     <br>
     <div class="dog_thumbs" id="loaded_images">

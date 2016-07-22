@@ -131,7 +131,7 @@ h2 {
   padding-top: 25px;
 }
 
-p, h2, table, .form, .button, .buttons {
+p, h2, table, .button, .buttons {
   margin-left: 50px;
 }
 
@@ -179,16 +179,22 @@ p, h2, table, .form, .button, .buttons {
 
 .form {
 
-  border: 1px solid gray;
-  border-radius: 10px;
-  padding: 20px;
-  display: inline-block;
+  //border: 1px solid gray;
+  //border-radius: 10px;
+  //padding: 20px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  margin-bottom: 21px;
+  //display: inline-block;
 
   .button {
     float: right;
     margin: 0;
     margin-top: 5px;
     width: auto;
+    font-size: 24px;
   }
 }
 
@@ -271,10 +277,36 @@ p, h2, table, .form, .button, .buttons {
 
 input[type="number"],
 input[type="text"] {
+  font-size: 24px;
   margin-top: 5px;
-  width: 125px;
+  width: 304px;
 }
 
+input[type="submit"]  {
+  font-size: 24px;
+  margin-top: 5px;
+}
+
+.js input[type="file"] {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.no-js .jsonly {
+    display: none;
+}
+
+textarea, label {
+  font-size: 24px;
+}
+
+textarea {
+  margin-top: 10px;
+}
 .middle-v {
   position: absolute;
 }
@@ -284,4 +316,5 @@ label {
   width: 70px;
   margin-top: 5px;
   padding-left: 2px;
+
 }

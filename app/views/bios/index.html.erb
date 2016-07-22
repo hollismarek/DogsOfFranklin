@@ -4,6 +4,8 @@
   <% @bios.each do |bio| %>
     <li>
       <div>
+        <span class='dog_name'><%= bio.name %></span>
+        <br>
         <% if bio.main_image != nil %>
           <%= link_to image_tag(bio.main_image, alt: 'Profile image for ' + bio.name), bio, class: 'dog_link', remote: true %>
         <% else %>

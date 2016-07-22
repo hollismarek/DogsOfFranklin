@@ -1,13 +1,12 @@
-<h2>Contact Us!</h2>
-  <div class="form">
+<div class="form">
   <%= form_for @contact do |frm| %>
-  <%= frm.label :name %>
-  <%= frm.text_field :name %> <br>
-  <%= frm.label :email %>
-  <%= frm.text_field :email %> <br>
-  <%= frm.label :content %> <br>
-  <%= frm.text_area :content, cols: "30", rows: "10" %>
-  <br>
-  <%= frm.submit 'Send', id: 'save_button', class: 'button'%>
+    <%= frm.label :name %>
+    <%= frm.text_field :name %> <br>
+    <%= frm.label :email %>
+    <%= frm.text_field :email %> <br>
+    <%= frm.label :content %> <br>
+    <%= frm.text_area :content, cols: "30", rows: "10" %>
+    <br>
+    <%= frm.submit 'Send', id: 'save_button', class: 'button'%>
   <% end %>
 </div>

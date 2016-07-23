@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+
+  def index
+    @users = User.all
+  end
+
   def new
     @user = User.new
   end
@@ -6,7 +11,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if User.count == 0
-      @user.is_admin = true 
+      @user.is_admin = true
     else
       @user.is_admin = false
     end
@@ -16,6 +21,10 @@ class UsersController < ApplicationController
     else
       redirect_to '/signup'
     end
+  end
+
+  def edit
+    @user = User.find(params[:id])
   end
 
   private

@@ -193,7 +193,7 @@ p, h2, table, .button, .buttons {
     margin: 0;
     margin-top: 5px;
     width: auto;
-    font-size: 24px;    
+    font-size: 24px;
   }
 }
 
@@ -275,7 +275,8 @@ p, h2, table, .button, .buttons {
 }
 
 input[type="number"],
-input[type="text"] {
+input[type="text"],
+input[type="password"] {
   font-size: 24px;
   margin-top: 5px;
   width: 304px;
@@ -312,7 +313,7 @@ textarea {
 
 label {
   float: left;
-  width: 70px;
+  width: 200px;
   margin-top: 5px;
   padding-left: 2px;
 

@@ -19,6 +19,7 @@ class PhotosController < ApplicationController
 
   # GET /photos/1/edit
   def edit
+    
   end
 
   # POST /photos

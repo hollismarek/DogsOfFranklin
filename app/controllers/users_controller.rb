@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-
+  before_action :set_user, only: [:show, :update, :edit]
   def index
     if current_user && current_user.is_admin
      @users = User.all
    else
-     redirect_to '/'
+     redirect_to '/login'
     end
   end
 
@@ -38,7 +38,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    if current_user && (current_user.is_admin || current_user = @user)
+    else
+      flash.notice = 'Not authorized'
+      redirect_to '/login'
+    end
   end
 
   def update
@@ -69,9 +73,25 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+  end
+  
   private
 
     def user_params
       params.require(:user).permit(:username, :first_name, :last_name, :email, :password)
+    end
+
+    def set_user
+      @user = User.find(params[:id])
+    end
+
+    def authorize(user)
+      if user && user.is_admin || user == current_user
+        @user = User.find(params[:id])
+      else
+        flash.notice = 'not authorized'
+        redirect_to '/'
+      end
     end
 end

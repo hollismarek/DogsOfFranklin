@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .dog_details {
   float: left;
+  width: 75%;
 }
 
 .dog_div {
@@ -20,6 +21,7 @@
 }
 
 .dog_thumbs {
+  width: 25%;
   float: right;
   ul {
     padding-left: 0;

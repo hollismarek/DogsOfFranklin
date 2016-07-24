@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
 
   def index
-    @users = User.all
+    if current_user && current_user.is_admin
+     @users = User.all
+   else
+     redirect_to '/'
+    end
   end
 
   def new
@@ -9,19 +13,27 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if User.count == 0
-      @user.is_admin = true
-      @user.status = 'Active'
-    else
-      @user.is_admin = false
-      @user.status = 'Pending'
-    end
-    if @user.save
-      session[:user_id] = @user.id
-      redirect_to '/'
-    else
+    existing =
+    if User.find_by email: params[:user][:email]
+      flash.notice = 'That email has already been used to create an account'
       redirect_to '/signup'
+    elsif User.find_by username: params[:user][:username]
+      flash.notice = 'That username has already been used to create an account'
+      redirect_to '/signup'
+    else
+      @user = User.new(user_params)
+      if User.count == 0
+        @user.is_admin = true
+        @user.status = 'Active'
+      else
+        @user.is_admin = false
+        @user.status = 'Pending'
+      end
+      if @user.save
+        redirect_to '/'
+      else
+        redirect_to '/signup'
+      end
     end
   end
 

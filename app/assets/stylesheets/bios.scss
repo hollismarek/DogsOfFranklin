@@ -4,6 +4,10 @@
 .dog_details {
   float: left;
   width: 75%;
+
+  p {
+    width: 300px;
+  }
 }
 
 .dog_div {
@@ -12,7 +16,7 @@
 
 .separator {
   width: 110px;
-  margin-left: 5px;
+  margin-left: 73px;
 }
 
 .dog_link img {
@@ -24,13 +28,15 @@
   width: 25%;
   float: right;
   ul {
-    padding-left: 0;
-    margin-left: 5px;
     margin-top: 5px;
     li {
       padding-left: 5px;
       list-style: none;
     }
+  }
+  .show_page_thumb {
+    margin-left: 5px;
+    padding-left: 0;
   }
 }
 

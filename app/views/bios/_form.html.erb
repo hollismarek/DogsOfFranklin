@@ -7,7 +7,7 @@
     <%= frm.number_field :age %> <br>
     <%= frm.label :breed %>
     <%= frm.text_field :breed %> <br>
-    <%= frm.label :likes %> 
+    <%= frm.label :likes %>
     <%= frm.text_area :likes, class: "small_area", cols: 30, rows: 5 %> <br>
     <%= frm.label :fears %>
     <%= frm.text_area :fears, class: "small_area", cols: 30, rows: 5 %> <br>
@@ -17,7 +17,7 @@
     <%= file_field :bio, :images, multiple: true, id: 'dogs_input' %>
     <%= frm.submit 'Save', id: 'save_button', class: 'button', style: 'float: right' %>
     </div>
-    <% if @bio.images %>
+    <% if @bio.images && @bio.images.count > 0 %>
       <div class="dog_thumbs" id="loaded_images">
         <ul id="existing_dogs">
           <% @bio.images.each do |img| %>

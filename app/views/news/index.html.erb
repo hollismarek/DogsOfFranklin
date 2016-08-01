@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+  <div class="news_main">
+    <% @news.each do |news| %>
+      <div class="news_header">
+        <h3><%= news.headline %></h3>
+      </div>
+      <div class="news_content">
+        <% if news.content.length > 200 %>
+          <%= truncate news.content, length: 200 %>
+          <%= link_to 'Read More', news %>
+        <% else %>
+          <%= news.content %>
+        <% end %>
+      </div>
+      <div class="news_footer">
+        Added by <%= news.author %> on <%= news.created_at %>
+        <% if current_user %>
+          <%= link_to 'Edit', edit_news_path(news) %>
+          <% if current_user.is_admin %>
+            <%= link_to 'Destroy', news, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  <br>
+  <% if current_user %>
+    <div class="button">
+      <%= link_to 'New Article', new_news_path %>
+    </div>
+  <% end %>
+</div>

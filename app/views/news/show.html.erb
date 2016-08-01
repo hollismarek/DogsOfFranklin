@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+<div class="news_main">
+  <div class="news_header">
+    <h2><%= @news.headline %></h2>
+  </div>
+
+  <div class="news_content">
+    <%= @news.content %>
+  </div>
+
+  <div class="news_footer">
+    Added by <%= @news.author %> on <%= @news.created_at %>.
+  </div>
+</div>

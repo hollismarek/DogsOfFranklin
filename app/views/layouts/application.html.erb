@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <header>
+    <div class="header">
       <%= image_tag '9Tz7jR8TE.png', alt: 'Pawprint', class: 'logo' %>
       <h1>Dogs Of Franklin, Massachusetts</h1>
       <% if current_user %>
@@ -18,9 +18,9 @@
           <li id="logout"><%= link_to 'Log out', logout_path, method: 'delete' %></li>
         </ul>
       <% end %>
-    </header>
+    </div>
     <div class='wrapper'>
-      <nav>
+      <div class="nav">
         <ul>
           <li><%= link_to 'Home', home_index_path, id: 'home' %></li>
           <li><%= link_to 'About', home_about_path, id: 'about' %></li>
@@ -31,13 +31,13 @@
           <% if current_user && current_user.is_admin %>
             <li><%= link_to 'Users', users_path, id: 'users' %></li>
           <% end %>
-      </nav>
-      <main>
+      </div>
+      <div class="main">
         <%= yield %>
-      </main>
-      <footer>
+      </div>
+      <div class="footer">
         &copy; Copyright GreatHall Web Development <%= Time.now.year %>.  All rights reserved.
-      </footer>
+      </div>
     </div>
     <script>
       $(document).ready(function() {

@@ -23,7 +23,7 @@
   margin-top: 5px;
 }
 
-nav {
+.nav {
   //float: left;
   //background-color: lightblue;
   width: 155px;
@@ -51,7 +51,7 @@ nav {
   }
 }
 
-main {
+.main {
   border-top-left-radius: 50px;
   border-left: 1px solid lightblue;
   border-top: 1px solid lightblue;
@@ -71,7 +71,7 @@ body {
   font-family: 'Taviraj', serif;
 }
 
-header {
+.header {
   //background-color: lightblue;
   width: 100%;
   padding: 10px 0 10px 0;
@@ -99,7 +99,7 @@ header {
   }
 }
 
-footer {
+.footer {
   height: 21px;
     font-size: small;
     text-align: center;

@@ -52,6 +52,14 @@
   line-height: 28px;
 }
 
+.pagination {
+  margin-left: 33px;
+
+  .current {
+    color: darkgray;
+  }
+}
+
 .gallery-list {
   margin: 33px 25px 25px 25px;
   padding-left: 25px;

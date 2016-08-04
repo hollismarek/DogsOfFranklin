@@ -135,6 +135,20 @@ p, h2, table, .button, .buttons {
   margin-left: 50px;
 }
 
+.page_button, .button {
+  padding: 5px 10px 5px 10px;
+  border: 1px solid #aaa;
+  border-top-color:#ddd;
+  border-left-color:#ddd;
+  border-radius:3px;
+  display: inline-block;
+  background-color: white;
+  a {
+    text-decoration: none;
+    text-color: black;
+  }
+}
+
 .wrapper {
   min-height:100%;
   width:100%;
@@ -142,18 +156,7 @@ p, h2, table, .button, .buttons {
   display:inline-block;
 }
 .button {
-  padding: 5px 10px 5px 10px;
-  border: 1px solid #aaa;
-  border-top-color:#ddd;
-  border-left-color:#ddd;
-  border-radius:3px;
   margin-bottom: 10px;
-  display: inline-block;
-  background-color: white;
-  a {
-    text-decoration: none;
-    text-color: black;
-  }
 }
 
 .button:hover {

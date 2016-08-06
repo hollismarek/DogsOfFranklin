@@ -27,7 +27,7 @@ class BiosController < ApplicationController
         format.json { render json: @bio }
     end
   end
-
+  
   # GET /bios/new
   def new
     @bio = Bio.new

@@ -12,6 +12,16 @@ class PhotosController < ApplicationController
   def show
   end
 
+  def show_random
+    @image_path = Photo.offset(rand(Photo.count)).first.path
+    while @image_path == params['data']
+      @image_path = Photo.offset(rand(Photo.count)).first.path
+    end
+    respond_to do |format|
+      format.js # show.js.erb
+    end
+  end
+
   # GET /photos/new
   def new
     @image = Photo.new
@@ -19,7 +29,7 @@ class PhotosController < ApplicationController
 
   # GET /photos/1/edit
   def edit
-    
+
   end
 
   # POST /photos
@@ -70,6 +80,6 @@ class PhotosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_params
-      params.require(:photo).permit(:path, :comment)
+      params.require(:photo).permit(:path, :comment, :data)
     end
 end

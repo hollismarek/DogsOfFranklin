@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'contacts', to: 'contact#new'
   post 'contacts', to: 'contact#create'
   get 'home_links', to: 'home#links'
+  get 'photo_random', to: 'photos#show_random'
 
   get 'signup', to: 'users#new'
   resources :users

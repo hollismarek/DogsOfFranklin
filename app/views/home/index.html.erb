@@ -4,3 +4,13 @@
   Welcome to the Franklin Massachusetts Dog site.
 <p>
 <%= image_tag @image_path, class: 'home_image' %>
+
+<script>
+  $(document).ready(function() {
+    setTimeout(function() {getNewImage('<%= @image_path %>')}, 5000);
+  });
+
+  function getNewImage(image_path) {
+    $.get('<%= photo_random_url %>', {data: image_path });
+  }
+</script>

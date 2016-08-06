@@ -1,6 +1,6 @@
-$('.home_image').fadeOut(1500, function() {
+$('.home_image').slideUp(2000, function() {
   $('.home_image').attr('src', '<%= @image_path %>');
   $('.home_image').attr('alt', '<%= @image_path %>');
-  $('.home_image').fadeIn(1500);
+  $('.home_image').slideDown(2000);
   setTimeout(function() { getNewImage('<%= @image_path %>') }, 5000);
 });

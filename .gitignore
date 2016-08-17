@@ -20,4 +20,5 @@
 # Ignore Byebug command history file.
 .byebug_history
 /public/images
+!/public/images/9Tz7jR8TE_small.ico
 .env

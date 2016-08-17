@@ -5,6 +5,7 @@ class HomeController < ApplicationController
     else
       @image_path = 'peteyatrest.png'
     end
+    @news = News.order("id desc").last(3)
   end
 
   def about

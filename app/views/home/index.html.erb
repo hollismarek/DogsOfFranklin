@@ -4,7 +4,22 @@
   Welcome to the Franklin Massachusetts Dog site.
 <p>
 <%= image_tag @image_path, class: 'home_image' %>
-
+<hr class="news_separator">
+<div class="homepage_news">
+<% @news.each do |news| %>
+  <h2 class="news_header_homepage"><%= link_to news.headline, news %> </h2>
+  <div class="news_details_homepage">
+    Added by <%= news.author %> on <%= news.created_at %>
+  </div>
+  <div class="news_content_homepage">
+    <% if news.content.length > 200 %>
+      <%= truncate news.content, length: 200 %>
+    <% else %>
+      <%= news.content %>
+    <% end %>
+  </div>
+</div>
+<% end %>
 <script>
   $(document).ready(function() {
     //setTimeout(function() {getNewImage('<%= @image_path %>')}, 10000);

@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+<% @links.each do |key, link_array| %>
+  <h2> <%= key %> </h2>
+  <ul>
+    <% link_array.each do |link| %>
+      <li><%= link_to link.name, link.url, target: '_blank' %>: <%= link.description %> <% if current_user %>
+        <%= link_to 'Edit', edit_link_path(link) %>
+        <% if current_user.is_admin %>
+          <%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      <% end %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+
+<% if current_user %>
+  <div class="button">
+    <%= link_to 'New link', new_link_path, id: 'new_link' %>
+  </div>
+<% end %>
